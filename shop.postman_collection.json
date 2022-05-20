@@ -1,0 +1,489 @@
+{
+	"info": {
+		"_postman_id": "07f8a96f-b83d-46b2-a6f1-faf8b6447a8e",
+		"name": "shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"lucky\",\n    \"email\":\"lucky@gmail.com\",\n    \"password\":\"12345678\",\n    \"isAdmin\":\"true\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auth/register",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData=pm.response.json()",
+							"pm.globals.set(\"accessToken\", jsonData.accessToken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"lucky\",\n    \"password\":\"12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auth/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get one user by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODcyY2VjYzNhNDhhY2IzNGM3MDg5YyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NTMwMjc3ODksImV4cCI6MTY1MzI4Njk4OX0.xsUpWUUcopFyfiq_XmWby66uz8OIsTq7slrPR_kRAoY",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "user",
+						"value": "lucky",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"admin\",\n    \"email\":\"admin@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/users/find/62873567a11ea210908ffe58",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"users",
+						"find",
+						"62873567a11ea210908ffe58"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyM2ZmOTY4MWNiNWNjZTMwMDk4NjAyMSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0ODM2MDU0MSwiZXhwIjoxNjQ4NjE5NzQxfQ.YL_NMoRUK6khxoJT-q3VBfwivtiHUTHxuJfrjwil8nI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"lucky_admin@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/users/62873567a11ea210908ffe58",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"users",
+						"62873567a11ea210908ffe58"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyM2ZmOTY4MWNiNWNjZTMwMDk4NjAyMSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0ODM2MDU0MSwiZXhwIjoxNjQ4NjE5NzQxfQ.YL_NMoRUK6khxoJT-q3VBfwivtiHUTHxuJfrjwil8nI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/users/62873567a11ea210908ffe58",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"users",
+						"62873567a11ea210908ffe58"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyM2ZmZDJiOWUwMjQ5NjJkMGU0MTI0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0ODkwNzc4OSwiZXhwIjoxNjQ5MTY2OTg5fQ.Pc-9MFtOetFxwI_wZii6nqE0wfFM4sumvlG4DKEtF5A",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/users",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get stats",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyM2ZmOTY4MWNiNWNjZTMwMDk4NjAyMSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0ODM2MDU0MSwiZXhwIjoxNjQ4NjE5NzQxfQ.YL_NMoRUK6khxoJT-q3VBfwivtiHUTHxuJfrjwil8nI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/users/stats",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"users",
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyM2ZmOTY4MWNiNWNjZTMwMDk4NjAyMSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0ODM2MDU0MSwiZXhwIjoxNjQ4NjE5NzQxfQ.YL_NMoRUK6khxoJT-q3VBfwivtiHUTHxuJfrjwil8nI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"nike shoe\",\n    \"desc\":\"sport special\",\n    \"img\":\"test\",\n    \"categories\":[\"tshirt\",\"man\"],\n    \"size\":\"M\",\n    \"color\":\"gray\",\n    \"price\":250,\n    \"tag\":\"nike brand\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/products",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all products",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyM2ZmOTY4MWNiNWNjZTMwMDk4NjAyMSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0ODM2MDU0MSwiZXhwIjoxNjQ4NjE5NzQxfQ.YL_NMoRUK6khxoJT-q3VBfwivtiHUTHxuJfrjwil8nI",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/products?category=tshirt&limit=1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "tshirt"
+						},
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insert Orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyM2ZmZDJiOWUwMjQ5NjJkMGU0MTI0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0ODkwNzc4OSwiZXhwIjoxNjQ5MTY2OTg5fQ.Pc-9MFtOetFxwI_wZii6nqE0wfFM4sumvlG4DKEtF5A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\":\"623ffd2b9e024962d0e4124a\",\n    \"products\":[\n        {\n            \"productId\":\"prod3\",\n            \"quantity\":5\n        },\n        {\n            \"productId\":\"prod4\",\n            \"quantity\":4 \n        }\n\n    ],\n    \"amount\":2000,\n    \"address\":\"Chennai\",\n    \"status\":\"pending\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/orders",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyM2ZmZDJiOWUwMjQ5NjJkMGU0MTI0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0ODkwNzc4OSwiZXhwIjoxNjQ5MTY2OTg5fQ.Pc-9MFtOetFxwI_wZii6nqE0wfFM4sumvlG4DKEtF5A",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/orders/6287372aa11ea210908ffe6b",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"orders",
+						"6287372aa11ea210908ffe6b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Income",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyM2ZmZDJiOWUwMjQ5NjJkMGU0MTI0YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0ODkwNzc4OSwiZXhwIjoxNjQ5MTY2OTg5fQ.Pc-9MFtOetFxwI_wZii6nqE0wfFM4sumvlG4DKEtF5A",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/orders/income",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"orders",
+						"income"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
